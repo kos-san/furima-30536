@@ -11,6 +11,33 @@
 | last_name       | string | null: false |
 | first_name_kana | string | null: false |
 | last_name_kana  | string | null: false |
-| birthday_year   | int    | null: false |
-| birthday_month  | int    | null: false |
-| birthday_day    | int    | null: false |
+| birthday        | date   | null: false |
+
+### Association
+
+- has_many :items
+- has_many :buys
+
+## item テーブル
+
+| Column      | Type   | Options     |
+| ----------- | ------ | ----------- |
+| name        | string | null: false |
+| description | text   | null: false |
+| price       | int    | null: false |
+
+### Association
+
+- has_one :buy
+- belongs_to :user
+
+## buys テーブル
+
+| Column  | Type   | Options     |
+| ------- | ------ | ----------- |
+| address | string | null: false |
+
+### Association
+
+- belongs_to :users
+- belongs_to :item
