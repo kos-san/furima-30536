@@ -24,7 +24,7 @@
 | ------------ | --------- | ----------------------------- |
 | name         | string    | null: false                   |
 | description  | text      | null: false                   |
-| price        | int       | null: false                   |
+| price        | integer   | null: false                   |
 | user         | reference | null: false, foreign_key: true|
 | category_id  | integer   | null: false                   |
 | condition_id | integer   | null: false                   |
@@ -46,9 +46,9 @@
 
 ### Association
 
-- belongs_to :users
+- belongs_to :user
 - belongs_to :item
-- has_one :addresses
+- has_one :address
 
 ## addresses テーブル
 
@@ -56,7 +56,7 @@
 | ----------- | --------- | ------------------------------ |
 | buy         | reference | null: false, foreign_key: true |
 | postal_code | string    | null: false                    |
-| area        | integer   | null: false                    |
+| area_id     | integer   | null: false                    |
 | city        | string    | null: false                    |
 | house_code  | string    | null: false                    |
 | tel         | string    | null: false                    |
