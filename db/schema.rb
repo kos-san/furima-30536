@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2020_10_09_115459) do
     t.integer "condition_id", null: false
     t.integer "charge_id", null: false
     t.integer "area_id", null: false
-    t.integer "days_id", null: false
+    t.integer "day_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_items_on_user_id"
