@@ -30,7 +30,7 @@
 | condition_id | integer   | null: false                   |
 | charge_id    | integer   | null: false                   |
 | area_id      | integer   | null: false                   |
-| days_id      | integer   | null: false                   |
+| day_id      | integer   | null: false                   |
 
 ### Association
 
