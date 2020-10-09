@@ -97,6 +97,11 @@ RSpec.describe User, type: :model do
     @user.valid?
     expect(@user.errors.full_messages).to include('First name kana Full-width katakana characters')
   end
+  it 'first_name_kanaが数字では登録できないこと' do
+    @user.first_name_kana = '12345'
+    @user.valid?
+    expect(@user.errors.full_messages).to include('First name kana Full-width katakana characters')
+  end
   it 'last_name_kanaが空では保存できないこと' do
     @user.last_name_kana = nil
     @user.valid?
@@ -107,8 +112,13 @@ RSpec.describe User, type: :model do
     @user.valid?
     expect(@user.errors.full_messages).to include('Last name kana Full-width katakana characters')
   end
-  it 'first_name_kanaが英字だと登録できないこと' do
+  it 'last_name_kanaが英字だと登録できないこと' do
     @user.last_name_kana = 'English'
+    @user.valid?
+    expect(@user.errors.full_messages).to include('Last name kana Full-width katakana characters')
+  end
+  it 'last_name_kanaが数字では登録できないこと' do
+    @user.last_name_kana = '12345'
     @user.valid?
     expect(@user.errors.full_messages).to include('Last name kana Full-width katakana characters')
   end
