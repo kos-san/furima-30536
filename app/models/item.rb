@@ -20,4 +20,12 @@ class Item < ApplicationRecord
 
   # id:1を選択できないようにバリデーションの設定
   validates :category_id, :condition_id, :charge_id, :area_id, :day_id, numericality: { other_than: 1 }
+
+  # 半角英数でなければ登録できない, 金額が300~9,999,999までの範囲で登録する
+  validates :price, format: { with: /\A\d{3}\z/, message: 'Price Half-width number' }, numericality: {greater_than: 299,less_than: 10000000, message: 'Price Out of setting range'}
+
+
+  
 end
+
+
