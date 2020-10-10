@@ -58,12 +58,12 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Price can't be blank", 'Price Out of setting range', 'Price Half-width number')
     end
     it 'priceが300未満では登録できない' do
-      @item.price %= 299
+      @item.price = 299
       @item.valid?
       expect(@item.errors.full_messages).to include('Price Out of setting range')
     end
     it 'priceが10,000,000以上では登録できない' do
-      @item.price *= 10 while @item.price < 9_999_999
+      @item.price = 10_000_000
       @item.valid?
       expect(@item.errors.full_messages).to include('Price Out of setting range')
     end

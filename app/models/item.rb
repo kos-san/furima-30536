@@ -2,7 +2,6 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
   has_one_attached :image
-  validates :image, presence: true, unless: :was_attached?
 
   belongs_to_active_hash :category
   belongs_to_active_hash :condition
@@ -10,10 +9,13 @@ class Item < ApplicationRecord
   belongs_to_active_hash :area
   belongs_to_active_hash :day
 
-  validates :name,        presence: true
-  validates :description, presence: true
-  validates :price,       presence: true
-  validates :user,        presence: true
+  with_options presence: true do
+    validates :name
+    validates :description
+    validates :price
+    validates :user
+    validates :image, unless: :was_attached?
+  end
 
   # id:1を選択できないようにバリデーションの設定
   validates :category_id, :condition_id, :charge_id, :area_id, :day_id, numericality: { other_than: 1, message: 'Select' }
