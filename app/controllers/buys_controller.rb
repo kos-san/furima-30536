@@ -25,10 +25,8 @@ class BuysController < ApplicationController
   end
 
   def user_confirmation
-    Buy.all.each do |buy| 
-      if buy.item_id == @item.id || @item.user_id == current_user.id
-        return redirect_to root_path
-      end
+    Buy.all.each do |buy|
+      return redirect_to root_path if buy.item_id == @item.id || @item.user_id == current_user.id
     end
   end
 
