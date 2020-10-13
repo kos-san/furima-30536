@@ -10,6 +10,7 @@ class BuyAddress
     validates :tel
     validates :token
     validates :user_id
+    validates :item_id
   end
 
   validates :area_id, numericality: { other_than: 1, message: 'Select' }
