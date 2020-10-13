@@ -132,13 +132,18 @@
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" %>
 
-        <!--  購入機能実装時に一緒に実装する
-          <%# 商品が売れていればsold outを表示しましょう %>
-          <div class='sold-out'>
-            <span>Sold Out!!</span>
-          </div>
+          
+
+
+          <% @buys.each do |buy| %>
+            <% if buy.item_id == item.id%>
+              <div class='sold-out'>
+                <span>Sold Out!!</span>
+              </div>
+            <% end %>
+          <% end %>
           <%# //商品が売れていればsold outを表示しましょう %>
-        -->
+        
         </div>
         <div class='item-info'>
           <h3 class='item-name'>

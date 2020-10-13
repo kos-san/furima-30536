@@ -5,8 +5,8 @@ class CreateAddresses < ActiveRecord::Migration[6.0]
       t.integer    :area_id,        null: false
       t.string     :city,           null: false
       t.string     :house_num,      null: false
-      t.string     :tel,            null: false, default: ""
-      t.string     :building
+      t.string     :tel,            null: false
+      t.string     :building,       default: ""
       t.references :buy,            foregin_key: true
       t.timestamps
     end

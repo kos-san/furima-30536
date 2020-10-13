@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update]
   def index
     @items = Item.all.order('created_at DESC')
+    @buys = Buy.all
   end
 
   def new
@@ -19,6 +20,14 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @buys = Buy.all
+    
+    @sold_out = 0
+    @buys.each do |buy|
+      if buy.item_id == @item.id
+        return @sold_out = 1
+      end
+    end
   end
 
   def edit
