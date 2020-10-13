@@ -3,16 +3,12 @@ class BuysController < ApplicationController
   def index
     @item = Item.find(params[:item_id])
     @buy_address = BuyAddress.new
-    buys = Buy.all
-    buys.each do |buy|
-      return redirect_to root_path if buy.item_id == @item.id
-    end
+    user_confirmation
   end
 
   def create
     @item = Item.find(params[:item_id])
     @buy_address = BuyAddress.new(buy_params)
-    binding.pry
     if @buy_address.valid?
       pay_item
       @buy_address.save
@@ -26,6 +22,14 @@ class BuysController < ApplicationController
 
   def buy_params
     params.require(:buy_address).permit(:postal_code, :area_id, :city, :house_num, :building, :tel).merge(user_id: current_user.id, item_id: @item.id, token: params[:token])
+  end
+
+  def user_confirmation
+    Buy.all.each do |buy| 
+      if buy.item_id == @item.id || @item.user_id == current_user.id
+        return redirect_to root_path
+      end
+    end
   end
 
   def pay_item
