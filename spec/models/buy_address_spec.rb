@@ -23,19 +23,19 @@ RSpec.describe BuyAddress, type: :model do
         expect(@buy_address.errors.full_messages).to include("Token can't be blank")
       end
       it '郵便番号が空では登録できない' do
-        @buy_address.postal_code = ""
+        @buy_address.postal_code = ''
         @buy_address.valid?
         expect(@buy_address.errors.full_messages).to include("Postal code can't be blank")
       end
       it '郵便番号が正しく入力されていないと登録できない' do
-        @buy_address.postal_code = "1231234"
+        @buy_address.postal_code = '1231234'
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include("Postal code Input correctly")
+        expect(@buy_address.errors.full_messages).to include('Postal code Input correctly')
       end
       it '都道府県が選択されていないと登録できない' do
         @buy_address.area_id = 1
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include("Area Select")
+        expect(@buy_address.errors.full_messages).to include('Area Select')
       end
       it '市町村が空だと登録できない' do
         @buy_address.city = nil
@@ -53,17 +53,15 @@ RSpec.describe BuyAddress, type: :model do
         expect(@buy_address.errors.full_messages).to include("Tel can't be blank")
       end
       it '電話番号が半角英数でないと登録できない' do
-        @buy_address.tel = "０９０１２３４１２３４"
+        @buy_address.tel = '０９０１２３４１２３４'
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include("Tel Input only number")
+        expect(@buy_address.errors.full_messages).to include('Tel Input only number')
       end
       it '電話番号が正しく入力されていないと登録できない' do
-        @buy_address.tel = "090123412345"
+        @buy_address.tel = '090123412345'
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include("Tel Input only number")
+        expect(@buy_address.errors.full_messages).to include('Tel Input only number')
       end
     end
-
   end
-
 end

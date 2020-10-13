@@ -5,9 +5,7 @@ class BuysController < ApplicationController
     @buy_address = BuyAddress.new
     buys = Buy.all
     buys.each do |buy|
-      if buy.item_id == @item.id
-        return redirect_to root_path
-      end
+      return redirect_to root_path if buy.item_id == @item.id
     end
   end
 
@@ -27,11 +25,11 @@ class BuysController < ApplicationController
   private
 
   def buy_params
-    params.require(:buy_address).permit(:postal_code, :area_id, :city, :house_num, :building, :tel).merge(user_id: current_user.id,item_id: @item.id, token: params[:token])
+    params.require(:buy_address).permit(:postal_code, :area_id, :city, :house_num, :building, :tel).merge(user_id: current_user.id, item_id: @item.id, token: params[:token])
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: @item.price,
       card: buy_params[:token],

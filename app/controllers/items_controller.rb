@@ -52,9 +52,7 @@ class ItemsController < ApplicationController
   def sold_out
     @sold_out = 0
     @buys.each do |buy|
-      if buy.item_id == @item.id
-        return @sold_out = 1
-      end
+      return @sold_out = 1 if buy.item_id == @item.id
     end
   end
 
