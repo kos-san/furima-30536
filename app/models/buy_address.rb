@@ -1,12 +1,14 @@
 class BuyAddress
   include ActiveModel::Model
   attr_accessor :user_id, :postal_code, :area_id, :city, :house_num, :building, :tel, :item_id
+  attr_accessor :token
 
   with_options presence: true do
     validates :postal_code
     validates :city
     validates :house_num
     validates :tel
+    validates :token
   end
 
   validates :area_id, numericality: { other_than: 1, message: "Select" }

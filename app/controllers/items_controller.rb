@@ -21,13 +21,7 @@ class ItemsController < ApplicationController
 
   def show
     @buys = Buy.all
-    
-    @sold_out = 0
-    @buys.each do |buy|
-      if buy.item_id == @item.id
-        return @sold_out = 1
-      end
-    end
+    sold_out
   end
 
   def edit
@@ -53,6 +47,15 @@ class ItemsController < ApplicationController
   end
 
   private
+
+  def sold_out
+    @sold_out = 0
+    @buys.each do |buy|
+      if buy.item_id == @item.id
+        return @sold_out = 1
+      end
+    end
+  end
 
   def item_params
     params.require(:item).permit(:name, :description, :price, :category_id, :condition_id, :charge_id, :area_id, :day_id, :image).merge(user_id: current_user.id)
