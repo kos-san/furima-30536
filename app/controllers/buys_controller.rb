@@ -1,13 +1,12 @@
 class BuysController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item, only: [:index, :create]
   def index
-    @item = Item.find(params[:item_id])
     @buy_address = BuyAddress.new
     user_confirmation
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @buy_address = BuyAddress.new(buy_params)
     if @buy_address.valid?
       pay_item
@@ -28,6 +27,10 @@ class BuysController < ApplicationController
     Buy.all.each do |buy|
       return redirect_to root_path if buy.item_id == @item.id || @item.user_id == current_user.id
     end
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 
   def pay_item
