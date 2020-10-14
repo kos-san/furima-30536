@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update]
   def index
     @items = Item.all.order('created_at DESC')
+    @buys = Buy.all
   end
 
   def new
@@ -19,6 +20,8 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @buys = Buy.all
+    sold_out
   end
 
   def edit
@@ -44,6 +47,13 @@ class ItemsController < ApplicationController
   end
 
   private
+
+  def sold_out
+    @sold_out = 0
+    @buys.each do |buy|
+      return @sold_out = 1 if buy.item_id == @item.id
+    end
+  end
 
   def item_params
     params.require(:item).permit(:name, :description, :price, :category_id, :condition_id, :charge_id, :area_id, :day_id, :image).merge(user_id: current_user.id)
